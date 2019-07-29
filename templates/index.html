@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <title>Poker</title>
+    <style>
+        body{
+            background-image: url(static/images/background.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        .flip-card{
+            background-color: transparent;
+            perspective: 1000px;
+            height: 175px;
+        }
+        .flip-card-inner{
+            position: relative;
+            transition:transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        /* .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        } */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .flip-card-front{
+            background-color: #bbb;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .btns {
+            margin: 50px;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+        }
+        .rotate-image{
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+   <div class="container main">
+       <!-- <div class="row"> -->
+           <div class="row" style="font-size: 25px;font-weight: bold; color:blue;margin:35px 0px 15px 5px">
+               Player
+           </div>
+       <div class="row cards">
+           {% for card in cards1 %}
+            <div class="col-sm-2">
+                <img src="static/images/{{card}}.png" style="height: 175px;">
+            </div>
+            {% endfor %}
+       </div>
+    <!-- </div> -->
+    <!-- <div class="row"> -->
+            <div class="row" style="font-size: 25px; color:blue;font-weight: bold;margin:15px 0px;">
+                Computer
+            </div>
+        <div class="row cards">
+            {% for card in cards2 %}
+            <div class="col-sm-2">
+            <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                        <img src="static/images/cover.png" alt="Cover" style="height: 175px;">
+                      </div>
+                      <div class="flip-card-back">
+                            <img src="static/images/{{card}}.png" alt="Cover" style="height: 175px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             {% endfor %}
+        </div>
+        <div class="row text-center btns">
+            <button class="btn btn-danger" id="deal">Deal</button>
+            <button class="btn btn-warning">Fold</button>
+            <button class="btn btn-success" id="show">Show</button>
+        </div>
+          <!-- </div> -->
+     </div>
+	 <div class="row text-center">
+		<b>Winner : </b>{{winner}}
+	 </div>
+     <script>
+         document.getElementById("show").addEventListener("click",function(){
+            var imag = document.getElementsByClassName("flip-card-inner");
+            for(i=0;i<imag.length;i++){
+                imag[i].style.transform = "rotateY(180deg)";
+            }
+         });
+         document.getElementById("deal").addEventListener("click",function(){
+             location.reload();
+         });
+     </script>
+     
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>
